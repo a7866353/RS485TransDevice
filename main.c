@@ -11,11 +11,21 @@
 
 
 #include "LCDDriver.h"
+#include "RS485Samle.h"
 #include "pic.h"
 #include <pic16F1947.h>
 
-__CONFIG (CP_OFF&WDTE_OFF& BOREN_OFF&PWRTE_OFF &FOSC_HS&WRT_OFF&LVP_OFF&CPD_OFF);
+__CONFIG (CP_OFF & WDTE_OFF & BOREN_OFF & 
+        PWRTE_OFF & FOSC_HS & PLLEN_OFF & WRT_OFF & LVP_OFF & CPD_OFF);
 
+
+void Delay(uint16 time);              //—” ±
+
+
+void Delay(uint16 time)
+{
+    while(time--);
+}
 
 
 //============
@@ -82,39 +92,36 @@ void lcdTestSample()
 //==============================
 // RS485 Test Sample
 //==========================
+
+
 void testRS485()
 {
-    char i=0;
-    SPBRG=25;
-    SPBRGH=0;
+    rs485Init();
+    
+    while(1)
+    {
+        rs485Send(0x55);
+        rs485Send(0xaa);
+    }
+    
+}
 
-    TX1STAbits.SYNC=0; // ??????
-    TX1STAbits.BRGH=0; // ??????
-    TX1STAbits.TX9=0;  // ????9?
-    BAUD1CONbits.BRG16=0; // ??????   
-   //BRGH=1; // ??????
+void testRS485Rev()
+{
+    uint8 rcv;
+    Init12864();
+    rs485Init(); 
+    
+    LCDSetLine(0);
+    LCDSendString("Get:");
+    while(1)
+    {
+        rcv = rs485GetChar();
+        LCDSetLine(1);
+        LCDSendChar(rcv);
+    }
 
-    PIE1bits .TX1IE=1; // ????
-    RC1STAbits.SPEN = 1; // USART??
-   // ????????????????????????????
-   // ?????????????????????
-   //RCSTA=0b10000000;  
-   //TXSTA=0b00100100;
-   TXREG='A'; // ?????????TXREG??USART????????
-   while(1)
-   {
-#if 0
-     while(strSentData[i]!='\0') // ?????????
-     {
-       TXREG=strSentData[i];
-       while(TRMT!=1) // ??????????????
-       {         
-       }
-       i++;
-     }
-    i=0;
-#endif
-   } 
+    
 }
 
 /*
@@ -124,7 +131,11 @@ int main(int argc, char** argv) {
     
     systemInit();
 
-
+    // lcdTestSample();
+    
+    testRS485();
+    // testRS485Rev();
+    
     return (EXIT_SUCCESS);
 }
 

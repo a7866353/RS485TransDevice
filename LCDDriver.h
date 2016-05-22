@@ -28,5 +28,8 @@ void Write12864_Dat(uint8 dat);
 
 void CheckBusy(void);       //ºÏ≤È√¶
 
+extern void LCDSetLine(uint8 line);
+extern void LCDSendChar(uint8 data);
+extern void LCDSendString(char* str);
 
 #endif /* LCDDRIVER_H_ */
