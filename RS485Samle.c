@@ -1,0 +1,1 @@
+#define D_RS485_BUS_DIR (PORTD)
