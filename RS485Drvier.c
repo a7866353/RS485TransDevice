@@ -1,4 +1,4 @@
-#include "RS485Samle.h"
+#include "RS485Drvier.h"
 #include <pic16F1947.h>
 
 #define D_RS485_BUS_DIR         LATCbits.LATC0
@@ -7,7 +7,7 @@
 #define D_RS485_BUS_DIR_DIR     TRISCbits.TRISC0
 
 
-void rs485Init()
+void RS485Init()
 {
     uint8 tmp;
     
@@ -34,13 +34,13 @@ void rs485Init()
     tmp = RC1REG;  // read RCREG to clear any pending IRQ
 }
 
-void rs485Send(uint8 data)
+void RS485Send(uint8 data)
 {
     D_RS485_BUS_DIR = D_RS485_BUS_DIR_OUT;    
     TX1REG=data;
     while(TX1STAbits.TRMT == 0);
 }
-uint8 rs485GetChar()
+uint8 RS485GetChar()
 {
     uint8 rcv;
     D_RS485_BUS_DIR = D_RS485_BUS_DIR_IN;

@@ -11,7 +11,7 @@
 
 
 #include "LCDDriver.h"
-#include "RS485Samle.h"
+#include "RS485Drvier.h"
 #include "pic.h"
 #include <pic16F1947.h>
 
@@ -96,12 +96,12 @@ void lcdTestSample()
 
 void testRS485()
 {
-    rs485Init();
+    RS485Init();
     
     while(1)
     {
-        rs485Send(0x55);
-        rs485Send(0xaa);
+        RS485Send(0x55);
+        RS485Send(0xaa);
     }
     
 }
@@ -110,13 +110,13 @@ void testRS485Rev()
 {
     uint8 rcv;
     Init12864();
-    rs485Init(); 
+    RS485Init(); 
     
     LCDSetLine(0);
     LCDSendString("Get:");
     while(1)
     {
-        rcv = rs485GetChar();
+        rcv = RS485GetChar();
         LCDSetLine(1);
         LCDSendChar(rcv);
     }
@@ -130,11 +130,17 @@ void testRS485Rev()
 int main(int argc, char** argv) {
     
     systemInit();
-
-    // lcdTestSample();
-    
+#if 0
+     lcdTestSample();
+#endif
+     
+#if 1
     testRS485();
-    // testRS485Rev();
+#endif
+    
+#if 0
+    testRS485Rev();
+#endif
     
     return (EXIT_SUCCESS);
 }
