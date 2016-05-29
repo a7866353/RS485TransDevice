@@ -113,10 +113,10 @@ void LCDSendChar(uint8 data)
     CheckBusy();
     Write12864_Dat(data); 
 }
-void LCDSendString(char* str)
+void LCDSendString(const char* str)
 {
     uint8 max,i;
-    max=strlen(str);
+    max=(uint8)strlen(str);
     for(i=0;i<max;i++)
     {
         CheckBusy();

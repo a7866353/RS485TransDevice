@@ -7,6 +7,9 @@
       <itemPath>LCDDriver.h</itemPath>
       <itemPath>type.h</itemPath>
       <itemPath>RS485Drvier.h</itemPath>
+      <itemPath>DataPipe.h</itemPath>
+      <itemPath>Common.h</itemPath>
+      <itemPath>FrameProtocol.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -17,7 +20,10 @@
                    projectFiles="true">
       <itemPath>main.c</itemPath>
       <itemPath>LCDDriver.c</itemPath>
-      <itemPath>RS485Samle.c</itemPath>
+      <itemPath>DataPipe.c</itemPath>
+      <itemPath>RS485Drvier.c</itemPath>
+      <itemPath>FrameProtocol.c</itemPath>
+      <itemPath>Common.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -135,6 +141,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

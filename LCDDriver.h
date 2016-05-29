@@ -8,9 +8,7 @@
 #ifndef LCDDRIVER_H_
 #define LCDDRIVER_H_
 
-#include "type.h"
-
-#include "string.h"                      //for strlen()
+#include "Common.h"
 
 #define    SETMODE       0x30   //并口8位数据接口,基本指令
 #define 	DISOPEN      0x0C   //显示开,不显示光标,光标不闪烁
@@ -30,6 +28,6 @@ void CheckBusy(void);       //检查忙
 
 extern void LCDSetLine(uint8 line);
 extern void LCDSendChar(uint8 data);
-extern void LCDSendString(char* str);
+extern void LCDSendString(const char* str);
 
 #endif /* LCDDRIVER_H_ */
