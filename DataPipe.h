@@ -15,7 +15,7 @@ extern "C" {
 #endif
     
 
-#define D_DATA_FRAME_MAX_LENGTH (128)
+#define D_DATA_FRAME_MAX_LENGTH (32)
     typedef struct
     {
         uint16 deviceAddress;

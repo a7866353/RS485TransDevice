@@ -31,8 +31,8 @@ void RS485Init()
     TRISCbits.TRISC6 = 0;  // TX1
     TRISCbits.TRISC7 = 1;  // RX1        
 
-    // SPBRG = 51;  // 9600bps=8M/[16*(51+1)]
-    SPBRG = 207;  // 9600bps=8M * 4 / [16*(207.33+1)]
+    SPBRG = 51;  // 9600bps=8M/[16*(51+1)]
+    // SPBRG = 207;  // 9600bps=8M * 4 / [16*(207.33+1)]
     SPBRGH=0;
 
     TX1STAbits.SYNC=0; // ??????
