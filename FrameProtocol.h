@@ -16,12 +16,24 @@ extern "C" {
 
     typedef enum
     {
-        E_FRAME_PROTO_ECHO = 0,
-        E_FRAME_PROTO_WRITE,
-        E_FRAME_PROTO_READ,
+        E_FRAME_PROTO_NONE = 0,
+        E_FRAME_PROTO_RESULT,
+        E_FRAME_PROTO_REGIEST_WRITE_SHORT,        
+        E_FRAME_PROTO_REGIEST_READ_SHORT,
+        E_FRAME_PROTO_LCD_WRITE,
+        E_FRAME_PROTO_LCD_READ,
+        E_FRAME_PROTO_LOOPBACK,
     } FrameProtoFuncCode;
-
-
+    
+    typedef struct
+    {
+        uint8 *BufPtr;
+        uint8 Pos;
+            
+    } DataWriterCtrl;
+    
+    
+    
 #ifdef	__cplusplus
 }
 #endif

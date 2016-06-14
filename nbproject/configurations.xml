@@ -24,6 +24,7 @@
       <itemPath>RS485Drvier.c</itemPath>
       <itemPath>FrameProtocol.c</itemPath>
       <itemPath>Common.c</itemPath>
+      <itemPath>ProtocolBase.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
