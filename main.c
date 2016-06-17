@@ -163,8 +163,7 @@ static void DataFrameTest()
     LCDSetLine(0);
     LCDSendString("Get:");
     
-    DataPipeInit(D_SLAVE_ADDRESS);
-    DataPipeFrameCB(DataFrameCB);  
+    DataPipeInit(D_SLAVE_ADDRESS, DataFrameCB);
     
     while(1)
     {

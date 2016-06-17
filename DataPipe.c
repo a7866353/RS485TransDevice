@@ -95,22 +95,18 @@ static void onDataRcv(uint8 rcv, uint8 flag)
     }
 }
 
-void DataPipeInit(uint16 deviceAddress)
+void DataPipeInit(uint16 deviceAddress,RcvCallback func)
 {
     memset(&gFrameRcvCtrl, 0, sizeof(gFrameRcvCtrl));
     memset(&gSlveHeader, 0, sizeof(gSlveHeader));
     
-    RS485Init(); 
-    RS485SetCallback(onDataRcv);
-    
+    gFrameRcvCtrl.callback = func;
     gFrameRcvCtrl.deviceAddress = deviceAddress;
     gSlveHeader.deviceAddress = deviceAddress;
+
+    RS485Init(onDataRcv);
 }
 
-void DataPipeFrameCB(RcvCallback func)
-{
-    gFrameRcvCtrl.callback = func;
-}
 
 void DataPipeSend(uint8 *buf, uint8 len)
 {

@@ -35,8 +35,7 @@ extern "C" {
     
     typedef void (*RcvCallback)(FrameData *);
     
-    extern void DataPipeInit(uint16 deviceAddress);
-    extern void DataPipeFrameCB(RcvCallback func);
+    extern void DataPipeInit(uint16 deviceAddress, RcvCallback func);
     extern void DataPipeSend(uint8 *buf, uint8 len);
 
 #ifdef	__cplusplus

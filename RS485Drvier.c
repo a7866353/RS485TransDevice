@@ -18,12 +18,13 @@ typedef struct
 static RS485Crtl gRS485Ctrl;
 
 
-void RS485Init()
+void RS485Init(RS485RcvCallback func)
 {
     uint8 tmp;
     
     memset(&gRS485Ctrl, 0, sizeof(gRS485Ctrl));
     
+    gRS485Ctrl.rcvCb = func;
     
     D_RS485_BUS_DIR = D_RS485_BUS_DIR_IN;
     D_RS485_BUS_DIR_DIR = 0;
@@ -73,10 +74,6 @@ void RS485Interrupt()
     
     if(gRS485Ctrl.rcvCb != NULL)
         gRS485Ctrl.rcvCb(rcv, flag);
-}
-void RS485SetCallback(RS485RcvCallback func)
-{
-    gRS485Ctrl.rcvCb = func;
 }
 
 void RS485Send(uint8 data)
