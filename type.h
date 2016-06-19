@@ -17,5 +17,6 @@
 #define uint64   unsigned long long int
 #define int64    signed long long int
 
+#define null    (0)
 
 #endif /* TYPE_H_ */

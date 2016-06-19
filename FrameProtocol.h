@@ -101,6 +101,7 @@ extern "C" {
     		LcdReadReq		lcdReadReq;
     		LcdReadRes		lcdReadRes;
     		LcdWriteReq		lcdWriteReq;
+            uint8           arr[];
     	} data;
     }  TransFrameData;
 

@@ -15,8 +15,8 @@ extern "C" {
 #endif
     typedef void (*RS485RcvCallback)(uint8 data, uint8 flag);
 
-    extern void RS485Init();
-    extern void RS485Interrupt(RS485RcvCallback func);
+    extern void RS485Init(RS485RcvCallback func);
+    extern void RS485Interrupt();
     extern void RS485Send(uint8 data);
     extern uint8 RS485GetChar();
     extern uint8 RS485GetCharWait();

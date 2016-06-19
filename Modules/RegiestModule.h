@@ -8,7 +8,7 @@
 #ifndef REGIESTMODULE_H_
 #define REGIESTMODULE_H_
 
-#include "common.h"
+#include "..\Common.h"
 
 typedef enum
 {

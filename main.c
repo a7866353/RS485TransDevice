@@ -98,7 +98,7 @@ void lcdTestSample()
 //==========================
 void testRS485()
 {
-    RS485Init();
+    RS485Init(null);
     
     while(1)
     {
@@ -112,7 +112,7 @@ void testRS485Rev()
 {
     uint8 rcv;
     Init12864();
-    RS485Init(); 
+    RS485Init(null); 
     
     LCDSetLine(0);
     LCDSendString("Get:");
@@ -135,8 +135,8 @@ static void rs485RcvCB(uint8 rcv, uint8 flag)
 void testRS485RevRB()
 {
     Init12864();
-    RS485Init(); 
-    RS485SetCallback(rs485RcvCB);
+    RS485Init(rs485RcvCB); 
+    RS485SetCallback();
     LCDSetLine(0);
     LCDSendString("Get:");
     while(1)
@@ -151,19 +151,19 @@ void testRS485RevRB()
 //==========================
 #define D_SLAVE_ADDRESS ((uint16)0x0101)
 
-static void DataFrameCB(FrameData *frame)
+static void DataPipeCB(FrameData *frame)
 {
     LCDSetLine(1);
     LCDSendChar(frame->frame.data[0]);
     DataPipeSend(frame->frame.data, frame->frame.header.length);
 }
-static void DataFrameTest()
+static void DataPipeTest()
 {
     Init12864();
     LCDSetLine(0);
     LCDSendString("Get:");
     
-    DataPipeInit(D_SLAVE_ADDRESS, DataFrameCB);
+    DataPipeInit(D_SLAVE_ADDRESS, DataPipeCB);
     
     while(1)
     {
@@ -171,6 +171,15 @@ static void DataFrameTest()
     }
     
 }
+
+//==============================
+// FramdData Test Sample
+//==========================
+static void DataFrameTest()
+{
+    FrameProto_Init();
+}
+
 
 
 /*
@@ -194,6 +203,10 @@ int main(int argc, char** argv) {
     testRS485RevRB();
 #endif
  
+#if 0
+    DataPipeTest();
+#endif
+    
 #if 1
     DataFrameTest();
 #endif

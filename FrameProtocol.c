@@ -1,6 +1,6 @@
 #include "FrameProtocol.h"
-#include "RegiestModule.h"
-
+#include "Modules\RegiestModule.h"
+#include "DataPipe.h"
 
 #if 0
 //============================
@@ -74,11 +74,11 @@ static TransFrameData gFrameBuffer;
 static uint8* getBuffer(FrameProtoFuncCode funcCode)
 {
 	gFrameBuffer.functionCode = funcCode;
-	return gFrameBuffer.data;
+	return gFrameBuffer.data.arr;
 }
 static void sendBuffer(uint8 size)
 {
-	DataPipeSend(&gFrameBuffer, size+1);
+	DataPipeSend((uint8 *)&gFrameBuffer, size+1);
 }
 
 
@@ -91,7 +91,7 @@ static void frameError(TransFrameData *data)
 
 static void frameRegRead(TransFrameData *data)
 {
-	RegiestReadRes *res = (ResultRes *)getBuffer(E_FRAME_FUNC_REGIEST_READ_SHORT);
+	RegiestReadRes *res = (RegiestReadRes *)getBuffer(E_FRAME_FUNC_REGIEST_READ_SHORT);
 	Regiest_Get(data->data.regReadReq.regiestAddress, &res->value);
 	sendBuffer(sizeof(RegiestReadRes));
 }
@@ -132,7 +132,7 @@ static void frameLoopback(TransFrameData *data)
 
 
 
-static FrameDispatch[E_FRAME_FUNC_MAX] =
+static FrameDispatch gDispatches[E_FRAME_FUNC_MAX] =
 {
 		frameError,
 		frameError,
@@ -146,11 +146,11 @@ static FrameDispatch[E_FRAME_FUNC_MAX] =
 
 static void onFrameRcv(FrameData *frame)
 {
-	TransFrameData *rcv = frame.data;
+	TransFrameData *rcv = (TransFrameData *)frame->data;
 	FrameDispatch func = 0;
 	if(rcv->functionCode >= E_FRAME_FUNC_MAX)
 		return;
-	func = frameDispatch[rcv->functionCode];
+	func = gDispatches[rcv->functionCode];
 	if(func == 0)
 		return;
 	func(frame->data);
