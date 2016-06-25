@@ -84,6 +84,10 @@ static void sendBuffer(uint8 size)
 }
 
 
+
+//================
+// Dispatch Functions
+//================
 static void frameError(TransFrameData *data)
 {
 	ResultRes *res = (ResultRes *)getBuffer(E_FRAME_FUNC_RESULT);
@@ -152,14 +156,14 @@ static FrameDispatch gDispatches[E_FRAME_FUNC_MAX] =
 
 static void onFrameRcv(FrameData *frame)
 {
-	TransFrameData *rcv = (TransFrameData *)frame->data;
+	TransFrameData *rcv = (TransFrameData *)frame->frame.data;
 	FrameDispatch func = 0;
 	if(rcv->functionCode >= E_FRAME_FUNC_MAX)
 		return;
 	func = gDispatches[rcv->functionCode];
 	if(func == 0)
 		return;
-	func(frame->data);
+	func(frame->frame.data);
 }
 
 void FrameProto_Init()

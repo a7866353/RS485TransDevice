@@ -211,6 +211,7 @@ int main(int argc, char** argv) {
     DataFrameTest();
 #endif
     
+    while(1);
     return (EXIT_SUCCESS);
 }
 
