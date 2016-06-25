@@ -56,7 +56,7 @@ void lcdTestSample()
     uint8 t;
     int16 max, len;
     
-    Init12864();
+    LCDInit();
     CheckBusy();
     Write12864_Com(SETADDR1);
     max=strlen(dis1);
@@ -111,7 +111,7 @@ void testRS485()
 void testRS485Rev()
 {
     uint8 rcv;
-    Init12864();
+    LCDInit();
     RS485Init(null); 
     
     LCDSetLine(0);
@@ -134,7 +134,7 @@ static void rs485RcvCB(uint8 rcv, uint8 flag)
 }
 void testRS485RevRB()
 {
-    Init12864();
+	LCDInit();
     RS485Init(rs485RcvCB); 
     RS485SetCallback();
     LCDSetLine(0);
@@ -159,7 +159,7 @@ static void DataPipeCB(FrameData *frame)
 }
 static void DataPipeTest()
 {
-    Init12864();
+	LCDInit();
     LCDSetLine(0);
     LCDSendString("Get:");
     

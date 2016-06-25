@@ -1,6 +1,8 @@
 #include "FrameProtocol.h"
-#include "Modules\RegiestModule.h"
 #include "DataPipe.h"
+
+#include "RegiestModule.h"
+#include "LcdModule.h"
 
 #if 0
 //============================
@@ -106,17 +108,21 @@ static void frameRegWrite(TransFrameData *data)
 
 static void frameLcdRead(TransFrameData *data)
 {
-	// TODO
-	ResultRes *res = (ResultRes *)getBuffer(E_FRAME_FUNC_RESULT);
-	res->result = E_FRAME_RESULT_NG;
-	sendBuffer(sizeof(ResultRes));
+	uint8 strLen;
+
+	LcdReadReq *pReq = &(data->data.lcdReadReq);
+	LcdReadRes *res = (LcdReadRes *)getBuffer(E_FRAME_FUNC_LCD_READ);
+	LCD_Get(pReq->displayLine, res->str, &strLen);
+	sendBuffer(sizeof(LcdReadRes));
 }
 
 static void frameLcdWrite(TransFrameData *data)
 {
-	// TODO
+	LcdWriteReq *pReq = &(data->data.lcdWriteReq);
+	LCD_Set(pReq->displayLine, pReq->str, sizeof(pReq->str));
+
 	ResultRes *res = (ResultRes *)getBuffer(E_FRAME_FUNC_RESULT);
-	res->result = E_FRAME_RESULT_NG;
+	res->result = E_FRAME_RESULT_OK;
 	sendBuffer(sizeof(ResultRes));
 }
 
@@ -158,9 +164,15 @@ static void onFrameRcv(FrameData *frame)
 
 void FrameProto_Init()
 {
-	memset(&frameError, 0, sizeof(frameError));
+	// Init Module
+	LCD_Init();
+	Regiest_Init();
+
+
+	memset(&gFrameBuffer, 0, sizeof(gFrameBuffer));
 	DataPipeInit(D_DEVICE_ADDRESS, onFrameRcv);
 }
+
 
 
 

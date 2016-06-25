@@ -8,7 +8,7 @@
 #ifndef REGIESTMODULE_H_
 #define REGIESTMODULE_H_
 
-#include "..\Common.h"
+#include "Common.h"
 
 typedef enum
 {
@@ -20,6 +20,7 @@ typedef enum
 	E_REG_MAX
 }RegiestNames;
 
+extern void Regiest_Init();
 extern void Regiest_Set(uint8 addr, uint16 value);
 extern void Regiest_Get(uint8 addr, uint16 *value);
 

@@ -22,7 +22,7 @@
 #define D_LCD_BUS_LIGHT     LATEbits.LATE4
 #define D_LCD_BUS_LIGHT_DIR TRISEbits.TRISE4
 
-void Init12864()
+void LCDInit()
 {
     D_LCD_BUS_DATA_DIR = 0;
     D_LCD_BUS_RS_DIR = 0;

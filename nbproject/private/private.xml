@@ -4,8 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/linwei/MPLABXProjects/TestPrj.X/DataPipe.c</file>
+            <file>file:/C:/Users/linwei/MPLABXProjects/TestPrj.X/Modules/LcdModule.h</file>
+            <file>file:/C:/Users/linwei/MPLABXProjects/TestPrj.X/RS485Drvier.c</file>
+            <file>file:/C:/Users/linwei/MPLABXProjects/TestPrj.X/Modules/RegiestModule.h</file>
             <file>file:/C:/Users/linwei/MPLABXProjects/TestPrj.X/FrameProtocol.c</file>
             <file>file:/C:/Users/linwei/MPLABXProjects/TestPrj.X/main.c</file>
+            <file>file:/C:/Users/linwei/MPLABXProjects/TestPrj.X/Modules/RegiestModule.c</file>
+            <file>file:/C:/Users/linwei/MPLABXProjects/TestPrj.X/Modules/LcdModule.c</file>
         </group>
     </open-files>
 </project-private>

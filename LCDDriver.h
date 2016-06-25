@@ -20,12 +20,13 @@
 #define 	CLEAR     0x01   //清屏,数据指针清零
 #define 	RET          0x02   //回车,数据指针清零
 
-void Init12864();
-void Write12864_Com(uint8 com);
-void Write12864_Dat(uint8 dat);
 
-void CheckBusy(void);       //检查忙
+extern void Write12864_Com(uint8 com);
+extern void Write12864_Dat(uint8 dat);
 
+extern void CheckBusy(void);       //检查忙
+
+extern void LCDInit();
 extern void LCDSetLine(uint8 line);
 extern void LCDSendChar(uint8 data);
 extern void LCDSendString(const char* str);
